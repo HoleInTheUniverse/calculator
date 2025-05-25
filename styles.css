@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+    width: 400px;
+    height: 550px;
+    margin: 150px auto;
+    padding: 15px;
+    background-color: rgb(56, 55, 55);
+    border: 5px solid rgb(148, 148, 148);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex: auto;
+}
+
+.first {
+    flex-grow: 2;
+}
+
+.button {
+    flex: 1;
+}
+
+.display {
+    flex: 1;
+    background-color: rgb(134, 148, 101);
+    margin-bottom: 10px;
+}

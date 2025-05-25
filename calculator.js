@@ -20,7 +20,7 @@ function divide (a, b) {
 
 function operate (firstOperand, secondOperand, operator) {
     switch (operator) {
-        case 'sum':
+        case 'addition':
             add(firstOperand, secondOperand);
             break;
         case 'subtraction':
