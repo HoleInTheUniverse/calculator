@@ -24,14 +24,27 @@
 
 .first {
     flex-grow: 2;
+    margin-bottom: 10px;
+    max-height: 100px;
 }
 
 .button {
     flex: 1;
+    font-size: 18px;
 }
 
 .display {
     flex: 1;
     background-color: rgb(134, 148, 101);
-    margin-bottom: 10px;
+}
+
+.operator {
+    max-width: 90px;
+    background-color: orangered;
+    color: white;
+}
+
+#button-clear {
+    background-color: rgb(0, 81, 255);
+    color: white;
 }
