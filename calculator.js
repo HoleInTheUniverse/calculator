@@ -1,6 +1,11 @@
-let firstOperand = 0;
-let secondOperand = 0;
+// Variables required for operations
+let firstOperand = '';
+let secondOperand = '';
 let operator = '';
+
+// DOM objects
+const display = document.querySelector(".display span");
+const buttons = document.querySelectorAll(".button");
 
 function add (a, b) {
     return a + b;
@@ -19,18 +24,50 @@ function divide (a, b) {
 }
 
 function operate (firstOperand, secondOperand, operator) {
+    let result;
+    const firstOperandN = parseInt(firstOperand);
+    const secondOperandN = parseInt(secondOperand);
+
     switch (operator) {
         case 'addition':
-            add(firstOperand, secondOperand);
+            result = add(firstOperandN, secondOperandN);
             break;
         case 'subtraction':
-            subtract(firstOperand, secondOperand);
+            result = subtract(firstOperandN, secondOperandN);
             break;
         case 'multiplication':
-            multiply(firstOperand, secondOperand);
+            result = multiply(firstOperandN, secondOperandN);
             break;
         case 'division':
-            divide(firstOperand, secondOperand);
+            result = divide(firstOperandN, secondOperandN);
             break;
     }
+
+    updateDisplay(result);
 }
+
+function updateDisplay (content) {
+    display.textContent = content;
+}
+
+function handleInput (event) {
+    if (event.target.id == "assignment") operate(firstOperand, secondOperand, operator);
+    else if (event.target.className.includes("operand")) {
+        const input = event.target.textContent;
+
+        if (operator == '') {
+            firstOperand += input;
+            updateDisplay(firstOperand);
+        }
+        else {
+            secondOperand += input;
+            updateDisplay(secondOperand);
+        }
+    }
+    else if (event.target.className.includes("operator")) operator = event.target.id;
+}
+
+// Events handling
+buttons.forEach((button) => {
+    button.addEventListener("click", handleInput);
+});

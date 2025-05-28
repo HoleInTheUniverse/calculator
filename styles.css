@@ -25,7 +25,7 @@
 .first {
     flex-grow: 2;
     margin-bottom: 10px;
-    max-height: 100px;
+    max-height: 90px;
 }
 
 .button {
@@ -36,6 +36,14 @@
 .display {
     flex: 1;
     background-color: rgb(134, 148, 101);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 3px;
+}
+
+.display span {
+    font-size: 64px;
 }
 
 .operator {
