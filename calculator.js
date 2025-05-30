@@ -23,27 +23,36 @@ function divide (a, b) {
     return a / b;
 }
 
-function operate (firstOperand, secondOperand, operator) {
-    let result;
-    const firstOperandN = parseInt(firstOperand);
-    const secondOperandN = parseInt(secondOperand);
+function operate () {
+    if ((firstOperand != '') && (secondOperand != '') && (operator != '')) {
+        let result;
+        const firstOperandN = parseInt(firstOperand);
+        const secondOperandN = parseInt(secondOperand);
 
-    switch (operator) {
-        case 'addition':
-            result = add(firstOperandN, secondOperandN);
-            break;
-        case 'subtraction':
-            result = subtract(firstOperandN, secondOperandN);
-            break;
-        case 'multiplication':
-            result = multiply(firstOperandN, secondOperandN);
-            break;
-        case 'division':
-            result = divide(firstOperandN, secondOperandN);
-            break;
+        switch (operator) {
+            case 'addition':
+                result = add(firstOperandN, secondOperandN);
+                break;
+            case 'subtraction':
+                result = subtract(firstOperandN, secondOperandN);
+                break;
+            case 'multiplication':
+                result = multiply(firstOperandN, secondOperandN);
+                break;
+            case 'division':
+                if (secondOperandN == 0) {
+                    clear(true);
+                    updateDisplay("Error");
+                    return;
+                }
+                result = divide(firstOperandN, secondOperandN);
+                break;
+        }
+
+        updateDisplay(result);
+        clear(false);
+        firstOperand = display.textContent; 
     }
-
-    updateDisplay(result);
 }
 
 function updateDisplay (content) {
@@ -59,10 +68,7 @@ function clear (display) {
 }
 
 function handleInput (event) {
-    if (event.target.id == "assignment") {
-        operate(firstOperand, secondOperand, operator);
-        clear(false);
-    }
+    if (event.target.id == "assignment") operate();
     else if (event.target.id == "clear") clear(true);
     else if (event.target.className.includes("operand")) {
         const input = event.target.textContent;
@@ -76,7 +82,10 @@ function handleInput (event) {
             updateDisplay(secondOperand);
         }
     }
-    else if (event.target.className.includes("operator")) operator = event.target.id;
+    else if (event.target.className.includes("operator")) {
+        operate();
+        operator = event.target.id;
+    }
 }
 
 // Events handling
