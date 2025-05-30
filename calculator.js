@@ -50,8 +50,20 @@ function updateDisplay (content) {
     display.textContent = content;
 }
 
+function clear (display) {
+    firstOperand = '';
+    secondOperand = '';
+    operator = '';
+
+    if (display) updateDisplay('');
+}
+
 function handleInput (event) {
-    if (event.target.id == "assignment") operate(firstOperand, secondOperand, operator);
+    if (event.target.id == "assignment") {
+        operate(firstOperand, secondOperand, operator);
+        clear(false);
+    }
+    else if (event.target.id == "clear") clear(true);
     else if (event.target.className.includes("operand")) {
         const input = event.target.textContent;
 
