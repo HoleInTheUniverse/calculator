@@ -2,6 +2,7 @@
 let firstOperand = '';
 let secondOperand = '';
 let operator = '';
+let newOperation = true;
 
 // DOM objects
 const display = document.querySelector(".display span");
@@ -63,6 +64,7 @@ function clear (display) {
     firstOperand = '';
     secondOperand = '';
     operator = '';
+    newOperation = true;    
 
     if (display) updateDisplay('');
 }
@@ -73,18 +75,26 @@ function handleInput (event) {
     else if (event.target.className.includes("operand")) {
         const input = event.target.textContent;
 
-        if (operator == '') {
-            firstOperand += input;
+        if (newOperation) {
+            newOperation = false;
+            firstOperand = input;
             updateDisplay(firstOperand);
         }
         else {
-            secondOperand += input;
-            updateDisplay(secondOperand);
+            if (operator == '') {
+                firstOperand += input;
+                updateDisplay(firstOperand);
+            }
+            else {
+                secondOperand += input;
+                updateDisplay(secondOperand);
+            }
         }
     }
     else if (event.target.className.includes("operator")) {
         operate();
         operator = event.target.id;
+        if (firstOperand != '') newOperation = false;
     }
 }
 
